@@ -64,7 +64,7 @@ function writeHTMLBody() {
         '        </form>' +
         '            <div style="clear:both"></div>' +
         '            <div id="my_error" name="my_error" style="font-size:2em;color:#f00;"><!-- my error should be displayed here --></div>';
-    console.log(' ...HTMLhead transmitted');
+    console.log(' ...HTMLbody transmitted');
     return HTMLbody;
 }
 
