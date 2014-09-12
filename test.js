@@ -5,8 +5,7 @@
 var http = require('http');
 var url = require('url');
 
-
-http.createServer(function (req, res) {
+function guessANumberGame (req, res) {
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     res.writeHead(200, {'Content-Type': 'text/html'});
@@ -30,6 +29,8 @@ http.createServer(function (req, res) {
         res.write('Type a number.');
     }
     res.end();
-}).listen(1337, '127.0.0.1');
+}
+
+http.createServer(guessANumberGame).listen(1337, '127.0.0.1');
 console.log('Server running at http://127.0.0.1:1337/');
 
