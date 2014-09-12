@@ -18,14 +18,14 @@ http.createServer(function (req, res) {
         var gues = query.input ;
         var answer =42 ;
         if (gues < answer) {
-		res.write('Too small');
-	}
+            res.write('Too small');
+        }
         else if (gues > answer) {
-		res.write('Too big');
-	}
-	else {
-		res.write('Bullseye');
-	}
+            res.write('Too big');
+        }
+        else {
+            res.write('Bullseye');
+        }
     } else {
         res.write('Type a number.');
     }
