@@ -7,15 +7,32 @@ var url = require('url');
 
 function calculator (req, res) {
 
-    /*var url_parts = url.parse(req.url, true);
-    var query = url_parts.query;*/
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.query;
+    var Operand_1 = query.Operand_1;
+    var Operand_2 = query.Operand_2;
+    var instruction = query.instruction;
+    var resultat;
+
 
     // send headers
     res.writeHead(200, {'Content-Type': 'text/html'});
     // HTML page begins
     res.write (writeHTMLHead());
     // HTML body with calculator content
-    res.write (writeHTMLBody());
+    //res.write (writeHTMLBody());
+
+     if (instruction == "add") {
+         resultat= Number(Operand_1)+Number(Operand_2);
+     } else if (instruction == "min") {
+         resultat= Number(Operand_1) - Number(Operand_2);
+     } else if (instruction == "mul") {
+         resultat= Number(Operand_1) * Number(Operand_2);
+     } else if (instruction == "div") {
+         resultat= Number(Operand_1) / Number(Operand_2);
+     }
+    res.write (writeHTMLBody(resultat));
+
     // HTML page ends
     res.write (writeHTMLBottom());
     // Close response
@@ -45,7 +62,7 @@ function writeHTMLHead(pageTitle) {
 /**
  * @returns The caclulator HTML code
  */
-function writeHTMLBody() {
+function writeHTMLBody(resultat) {
     var HTMLbody = '    <body>' +
         '<h1>My calculator</h1>' +
         '<form id="calculator">' +
@@ -59,7 +76,7 @@ function writeHTMLBody() {
         '        </div>' +
         '        <div style="float:left; padding-right:15px;">My second operand:<br><input type="text" name="Operand_2" id="Operand_2"></div>' +
         '            <div style="float:left; padding-right:15px;"><input type="submit" id="my_calc_submit" value="Show Result"></div>' +
-        '                <div id="my_result" name="my_result" style="float:left;font-size:10em;"><!-- my result should be displayed here --></div>' +
+        '                <div id="my_result" name="my_result" style="float:left;font-size:10em;">'+resultat+' <!-- my result should be displayed here --></div>' +
         '            </div>' +
         '        </form>' +
         '            <div style="clear:both"></div>' +
