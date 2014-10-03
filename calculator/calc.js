@@ -5,6 +5,31 @@
 var http = require('http');
 var url = require('url');
 
+function compute(expr) {
+    var calctype;
+
+    try {
+
+        var resultat = eval(expr.toString()).toString();
+
+        if (expr.indexOf("+")) {
+            calctype="addition";
+
+        }
+        else if (expr.indexOf("-")) {
+            calctype="addition";
+        }
+        else if (expr.indexOf("/")) {
+            calctype="addition";
+        }
+        else if (expr.indexOf("*")) {
+            calctype="addition";
+        }
+    } catch (e) {
+        return "ERROR: " + String(e);
+    }
+}
+
 function calculator (req, res) {
 
     var url_parts = url.parse(req.url, true);
@@ -12,7 +37,7 @@ function calculator (req, res) {
     if (query) {
         var Zonecalcul= query.Zonecalcul;
     }
-    var resultat;
+    var resultat = compute(Zonecalcul);
 
 
     // send headers
@@ -20,24 +45,6 @@ function calculator (req, res) {
     // HTML page begins
     res.write (writeHTMLHead());
     // HTML body with calculator content
-
-    var calctype;
-
-    var resultat = eval(Zonecalcul.toString()).toString();
-
-    if (Zonecalcul.indexOf("+")) {
-        calctype="addition";
-
-    }
-    else if (Zonecalcul.indexOf("-")) {
-        calctype="addition";
-    }
-    else if (Zonecalcul.indexOf("/")) {
-        calctype="addition";
-    }
-    else if (Zonecalcul.indexOf("*")) {
-        calctype="addition";
-    }
 
     res.write (writeHTMLBody(resultat));
 
