@@ -9,9 +9,9 @@ function calculator (req, res) {
 
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
-    var Operand_1 = query.Operand_1;
-    var Operand_2 = query.Operand_2;
-    var instruction = query.instruction;
+    if (query) {
+        var Zonecalcul= query.Zonecalcul;
+    }
     var resultat;
 
 
@@ -20,17 +20,25 @@ function calculator (req, res) {
     // HTML page begins
     res.write (writeHTMLHead());
     // HTML body with calculator content
-    //res.write (writeHTMLBody());
 
-     if (instruction == "add") {
-         resultat= Number(Operand_1)+Number(Operand_2);
-     } else if (instruction == "min") {
-         resultat= Number(Operand_1) - Number(Operand_2);
-     } else if (instruction == "mul") {
-         resultat= Number(Operand_1) * Number(Operand_2);
-     } else if (instruction == "div") {
-         resultat= Number(Operand_1) / Number(Operand_2);
-     }
+    var calctype;
+
+    var resultat = eval(Zonecalcul.toString()).toString();
+
+    if (Zonecalcul.indexOf("+")) {
+        calctype="addition";
+
+    }
+    else if (Zonecalcul.indexOf("-")) {
+        calctype="addition";
+    }
+    else if (Zonecalcul.indexOf("/")) {
+        calctype="addition";
+    }
+    else if (Zonecalcul.indexOf("*")) {
+        calctype="addition";
+    }
+
     res.write (writeHTMLBody(resultat));
 
     // HTML page ends
@@ -67,14 +75,7 @@ function writeHTMLBody(resultat) {
         '<h1>My calculator</h1>' +
         '<form id="calculator">' +
         '<div>' +
-        '    <div style="float:left; padding-right:15px;">My first operand:<br><input type="text" name="Operand_1" id="Operand_1"></div>' +
-        '        <div style="float:left; padding-right:15px;">' +
-        '            <input type="radio" name="instruction" value="add"/> + | Addition<br />' +
-        '            <input type="radio" name="instruction" value="min"/> - | Subtraction<br />' +
-        '            <input type="radio" name="instruction" value="mul"/> * | Multiplication<br />' +
-        '            <input type="radio" name="instruction" value="div"/> / | Division<br />' +
-        '        </div>' +
-        '        <div style="float:left; padding-right:15px;">My second operand:<br><input type="text" name="Operand_2" id="Operand_2"></div>' +
+        '    <div style="float:left; padding-right:15px;">calculation:<br><input type="text" name="Zonecalcul" id="Zonecalcul"></div>' +
         '            <div style="float:left; padding-right:15px;"><input type="submit" id="my_calc_submit" value="Show Result"></div>' +
         '                <div id="my_result" name="my_result" style="float:left;font-size:10em;">'+resultat+' <!-- my result should be displayed here --></div>' +
         '            </div>' +
