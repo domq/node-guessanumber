@@ -17,7 +17,9 @@ Some node.js test we made in [Dojo meetings](http://fr.wikipedia.org/wiki/Coding
   A file with some test function on question we can have
 
 ## Meeting
-*  2014-09-19: calculator's logique
+*  2014-10-10: testing calculator. 
+*  2014-10-03: calculator improvements. Hacking through eval() demonstration. 
+*  2014-09-19: calculator's logic
 *  2014-09-12: guess a number + test
 *  2014-09-04: first dojo, guess a number  
 

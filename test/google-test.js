@@ -2,7 +2,7 @@ var assert = require('assert'),
     test = require('selenium-webdriver/testing'),
     webdriver = require('selenium-webdriver');
 
-test.describe('Google Search', function() {
+test.describe('Google test 2', function() {
     test.it('should work', function() {
         var driver = new webdriver.Builder().withCapabilities(
             webdriver.Capabilities.chrome()).build();
@@ -14,6 +14,6 @@ test.describe('Google Search', function() {
             assert.equal(value, 'webdriver');
         });
 
-         driver.quit();
+         //driver.quit();
     });
 });
