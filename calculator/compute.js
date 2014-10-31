@@ -25,24 +25,22 @@ exports.compute = function compute(expr) {
     try {
         var resultat;
 
-       ["+","-","*","/","^"].forEach(function (op) {
-           if (expr.indexOf(op)>=0) {
-               var splitPieces = split_operation(expr, op);
+        var operators = ["+","-","*","/","^"];
+        for(var i = 0; i < operators.length; i++) {
+            var op = operators[i];
+            if (expr.indexOf(op) >= 0) {
+                found_operator = true;
+                var splitPieces = split_operation(expr, op);
 
-               var beginningOfExpression = splitPieces[0],
-                   secondOperand = splitPieces[1];
+                var beginningOfExpression = splitPieces[0],
+                    endOfExpression = splitPieces[1];
 
-               var firstOperand = beginningOfExpression;
-               ["+", "-", "*", "/", "^"].forEach(function (op) {
-                   if (beginningOfExpression.indexOf(op) >= 0) {
-                       var beginningOfExpressionPieces = split_operation(beginningOfExpression, op);
-
-                       firstOperand = single_operation(op, beginningOfExpressionPieces[0], beginningOfExpressionPieces[1]);
-                   }
-               });
-               resultat = single_operation(op, firstOperand, secondOperand);
-           }
-       });
+                var firstOperand = compute(beginningOfExpression);
+                var secondOperand = compute(endOfExpression);
+                return single_operation(op, firstOperand, secondOperand);
+            }
+        }
+        return expr;
     } catch (e) {
         return "ERROR: " + String(e);
     }

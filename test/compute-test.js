@@ -18,9 +18,12 @@ describe("split_operation", function () {
     })
 });
 describe("compute", function () {
-   it("does basic additions", function () {
-       assert.equal(compute("2 + 3"), 5);
-   });
+    it("does no operqtion", function () {
+        assert.equal(compute("2"), 2);
+    });
+    it("does basic additions", function () {
+        assert.equal(compute("2 + 3"), 5);
+    });
     it("does basic multiplications", function () {
         assert.equal(compute("2 * 3"), 6);
     });
@@ -31,11 +34,35 @@ describe("compute", function () {
         assert.equal(compute("5 ^ 2"), 25);
     });
 
-    it("does several additions", function () {
+    it("does two additions", function () {
         assert.equal(compute("1 + 2 + 7"), 10);
     });
-    it("does several subtractions", function () {
+    it("does three additions", function () {
+        assert.equal(compute("1 + 2 + 7 + 10"), 20);
+    });
+    it("does two subtractions", function () {
         assert.equal(compute("1 - 2 - 7"), -8);
+    });
+    it("does a lot of operations" , function () {
+        assert.equal(compute("1 + 2 + 3 + 4 + 1"), 11);
+    });
+    it("does a lot of operations subtractions" , function () {
+        assert.equal(compute("1 - 2 - 3 - 4 - 1"), -9);
+    });
+    it("does a lot of operations with mutl" , function () {
+        assert.equal(compute("1 * 2 + 3 + 4 + 1"), 10);
+    });
+    it("does a lot of operations with mutl" , function () {
+        assert.equal(compute("1 + 2 + 3 + 4 * 1"), 10);
+    });
+    it("does something really weird", function () {
+        assert.equal(compute("1 + 2 * 3"), 7);
+    });
+    it("does a lot of operations with two mutl" , function () {
+        assert.equal(compute("1 + 2 * 3 + 4 * 1"), 11);
+    });
+    it("does a lot of different operations" , function () {
+        assert.equal(compute("1 +       2 * 3 +       4 * 1 * 15"), 67);
     });
 });
 
