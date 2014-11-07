@@ -30,9 +30,6 @@ function calculator (req, res) {
     res.end();
 }
 
-http.createServer(calculator).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
-
 /**
  * @param pageTitle
  * @returns Basic HTML Header
@@ -79,5 +76,13 @@ function writeHTMLBottom() {
     return HTMLBottom;
 }
 
-exports.server = http.createServer(calculator);
-exports.server.listen(1337, '127.0.0.1');
+
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+    calculator(req, res);
+});
+
+app.listen(1337);
+console.log('Server running at http://127.0.0.1:1337/');
