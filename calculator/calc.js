@@ -78,3 +78,6 @@ function writeHTMLBottom() {
     console.log(' ...HTMLbottom transmitted');
     return HTMLBottom;
 }
+
+exports.server = http.createServer(calculator);
+exports.server.listen(1337, '127.0.0.1');
