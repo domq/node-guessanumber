@@ -16,27 +16,19 @@ function calculator (req, res) {
     var resultat = compute(Zonecalcul);
 
 
-    // send headers
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    // HTML page begins
-    res.write (writeHTMLHead());
-    // HTML body with calculator content
+    res.write (String(resultat));
 
-    res.write (writeHTMLBody(resultat));
-
-    // HTML page ends
-    res.write (writeHTMLBottom());
     // Close response
     res.end();
 }
-
-http.createServer(calculator).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
 
 /**
  * @param pageTitle
  * @returns Basic HTML Header
  */
+
+
+
 function writeHTMLHead(pageTitle) {
     pageTitle = typeof pageTitle !== 'undefined' ? pageTitle : 'Hello Dojo';
     var HTMLhead = '<!DOCTYPE html>';
@@ -44,6 +36,8 @@ function writeHTMLHead(pageTitle) {
     HTMLhead += '\n\t<head>';
     HTMLhead += '\n\t\t<meta charset=utf-8 />';
     HTMLhead += '\n\t\t<title>'+pageTitle+'</title>';
+    HTMLhead += '\n\t\t<script src=ajax.js></script>';
+
     HTMLhead += '\n\t</head>';
     HTMLhead += '\n\t<body>\n';
     console.log(' ...HTMLhead transmitted');
@@ -56,10 +50,10 @@ function writeHTMLHead(pageTitle) {
 function writeHTMLBody(resultat) {
     var HTMLbody = '    <body>' +
         '<h1>My calculator</h1>' +
-        '<form id="calculator">' +
+        '<form id="calculator" name="calculator">' +
         '<div>' +
         '    <div style="float:left; padding-right:15px;">calculation:<br><input type="text" name="Zonecalcul" id="Zonecalcul"></div>' +
-        '            <div style="float:left; padding-right:15px;"><input type="submit" id="my_calc_submit" value="Show Result"></div>' +
+        '            <div style="float:left; padding-right:15px;"><input type="button" id="my_calc_submit" value="Show Result" onclick="JavaScript:xmlhttpPost(\'/calc\')"></div>' +
         '                <div id="my_result" name="my_result" style="float:left;font-size:10em;">'+resultat+' <!-- my result should be displayed here --></div>' +
         '            </div>' +
         '        </form>' +
@@ -78,3 +72,33 @@ function writeHTMLBottom() {
     console.log(' ...HTMLbottom transmitted');
     return HTMLBottom;
 }
+
+function writeForm(res){
+    // send headers
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    // HTML page begins
+    res.write (writeHTMLHead());
+    // HTML body with calculator content
+
+    res.write (writeHTMLBody(""));
+
+    // HTML page ends
+    res.write (writeHTMLBottom());
+    // Close response
+    res.end();}
+
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+    writeForm(res);
+});
+
+app.post('/calc', function (req, res) {
+    calculator(req, res);
+});
+
+app.use(express.static(__dirname));
+
+app.listen(1337);
+console.log('Server running at http://127.0.0.1:1337/');
