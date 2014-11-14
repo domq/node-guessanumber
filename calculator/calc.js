@@ -38,7 +38,7 @@ function writeHTMLHead(pageTitle) {
     HTMLhead += '\n\t\t<meta charset=utf-8 />';
     HTMLhead += '\n\t\t<title>'+pageTitle+'</title>';
     HTMLhead += '\n\t\t<script src=ajax.js></script>';
-
+    HTMLhead += '<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>';
     HTMLhead += '\n\t</head>';
     HTMLhead += '\n\t<body>\n';
     console.log(' ...HTMLhead transmitted');
@@ -48,14 +48,14 @@ function writeHTMLHead(pageTitle) {
 /**
  * @returns The caclulator HTML code
  */
-function writeHTMLBody(resultat) {
+function writeHTMLBody() {
     var HTMLbody = '    <body>' +
         '<h1>My calculator</h1>' +
         '<form id="calculator" name="calculator">' +
         '<div>' +
         '    <div style="float:left; padding-right:15px;">calculation:<br><input type="text" name="Zonecalcul" id="Zonecalcul"></div>' +
         '            <div style="float:left; padding-right:15px;"><input type="button" id="my_calc_submit" value="Show Result" onclick="JavaScript:xmlhttpPost(\'/calc\')"></div>' +
-        '                <div id="result" name="result" style="float:left;font-size:10em;">'+resultat+' <!-- my result should be displayed here --></div>' +
+        '                <div id="result" name="result" style="float:left;font-size:10em;"> <!-- my result should be displayed here --></div>' +
         '            </div>' +
         '        </form>' +
         '            <div style="clear:both"></div>' +
@@ -81,7 +81,7 @@ function writeForm(res){
     res.write (writeHTMLHead());
     // HTML body with calculator content
 
-    res.write (writeHTMLBody(""));
+    res.write (writeHTMLBody());
 
     // HTML page ends
     res.write (writeHTMLBottom());
