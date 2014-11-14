@@ -9,7 +9,7 @@ function xmlhttpPost(strURL) {
     else if (window.ActiveXObject) {
         self.xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    self.xmlHttpReq.open('POST', strURL, true);
+    self.xmlHttpReq.open('GET', strURL + "?" + getquerystring(), true);
     self.xmlHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     self.xmlHttpReq.onreadystatechange = function() {
         if (self.xmlHttpReq.readyState == 4) {
@@ -23,7 +23,7 @@ function xmlhttpPost(strURL) {
 function getquerystring() {
     var form = document.forms['calculator'];
     var sender = form.Zonecalcul.value;
-    qstr = 'Zonecalcul=' + escape(sender);
+    qstr = 'Zonecalcul=' + encodeURIComponent(sender);
     // Remarque: pas de '?' avant la chaîne de requête
     return qstr;
 }

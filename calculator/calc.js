@@ -9,6 +9,7 @@ var compute = require("./compute").compute;
 function calculator (req, res) {
 
     var url_parts = url.parse(req.url, true);
+
     var query = url_parts.query;
     if (query) {
         var Zonecalcul= query.Zonecalcul;
@@ -54,7 +55,7 @@ function writeHTMLBody(resultat) {
         '<div>' +
         '    <div style="float:left; padding-right:15px;">calculation:<br><input type="text" name="Zonecalcul" id="Zonecalcul"></div>' +
         '            <div style="float:left; padding-right:15px;"><input type="button" id="my_calc_submit" value="Show Result" onclick="JavaScript:xmlhttpPost(\'/calc\')"></div>' +
-        '                <div id="my_result" name="my_result" style="float:left;font-size:10em;">'+resultat+' <!-- my result should be displayed here --></div>' +
+        '                <div id="result" name="result" style="float:left;font-size:10em;">'+resultat+' <!-- my result should be displayed here --></div>' +
         '            </div>' +
         '        </form>' +
         '            <div style="clear:both"></div>' +
@@ -94,7 +95,7 @@ app.get('/', function (req, res) {
     writeForm(res);
 });
 
-app.post('/calc', function (req, res) {
+app.get('/calc', function (req, res) {
     calculator(req, res);
 });
 
