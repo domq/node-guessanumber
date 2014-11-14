@@ -37,8 +37,7 @@ function writeHTMLHead(pageTitle) {
     HTMLhead += '\n\t<head>';
     HTMLhead += '\n\t\t<meta charset=utf-8 />';
     HTMLhead += '\n\t\t<title>'+pageTitle+'</title>';
-    HTMLhead += '\n\t\t<script src=ajax.js></script>';
-    HTMLhead += '<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>';
+
     HTMLhead += '\n\t</head>';
     HTMLhead += '\n\t<body>\n';
     console.log(' ...HTMLhead transmitted');
@@ -54,7 +53,7 @@ function writeHTMLBody() {
         '<form id="calculator" name="calculator">' +
         '<div>' +
         '    <div style="float:left; padding-right:15px;">calculation:<br><input type="text" name="Zonecalcul" id="Zonecalcul"></div>' +
-        '            <div style="float:left; padding-right:15px;"><input type="button" id="my_calc_submit" value="Show Result" onclick="JavaScript:xmlhttpPost(\'/calc\')"></div>' +
+        '            <div style="float:left; padding-right:15px;"><input type="submit" id="my_calc_submit" value="Show Result"></div>' +
         '                <div id="result" name="result" style="float:left;font-size:10em;"> <!-- my result should be displayed here --></div>' +
         '            </div>' +
         '        </form>' +
@@ -68,7 +67,9 @@ function writeHTMLBody() {
  * @returns Basic HTML to close page
  */
 function writeHTMLBottom() {
-    var HTMLBottom = '\n\t</body>';
+    var  HTMLBottom = '<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>';
+    HTMLBottom += '\n\t\t<script src=ajax.js></script>';
+    HTMLBottom += '\n\t</body>';
     HTMLBottom += '\n</html>';
     console.log(' ...HTMLbottom transmitted');
     return HTMLBottom;
