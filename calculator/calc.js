@@ -23,77 +23,23 @@ function calculator (req, res) {
     res.end();
 }
 
-/**
- * @param pageTitle
- * @returns Basic HTML Header
- */
-
-
-
-function writeHTMLHead(pageTitle) {
-    pageTitle = typeof pageTitle !== 'undefined' ? pageTitle : 'Hello Dojo';
-    var HTMLhead = '<!DOCTYPE html>';
-    HTMLhead += '\n<html>';
-    HTMLhead += '\n\t<head>';
-    HTMLhead += '\n\t\t<meta charset=utf-8 />';
-    HTMLhead += '\n\t\t<title>'+pageTitle+'</title>';
-
-    HTMLhead += '\n\t</head>';
-    HTMLhead += '\n\t<body>\n';
-    console.log(' ...HTMLhead transmitted');
-    return HTMLhead;
-}
-
-/**
- * @returns The caclulator HTML code
- */
-function writeHTMLBody() {
-    var HTMLbody = '    <body>' +
-        '<h1>My calculator</h1>' +
-        '<form id="calculator" name="calculator">' +
-        '<div>' +
-        '    <div style="float:left; padding-right:15px;">calculation:<br><input type="text" name="Zonecalcul" id="Zonecalcul"></div>' +
-        '            <div style="float:left; padding-right:15px;"><input type="submit" id="my_calc_submit" value="Show Result"></div>' +
-        '                <div id="result" name="result" style="float:left;font-size:10em;"> <!-- my result should be displayed here --></div>' +
-        '            </div>' +
-        '        </form>' +
-        '            <div style="clear:both"></div>' +
-        '            <div id="my_error" name="my_error" style="font-size:2em;color:#f00;"><!-- my error should be displayed here --></div>';
-    console.log(' ...HTMLbody transmitted');
-    return HTMLbody;
-}
-
-/**
- * @returns Basic HTML to close page
- */
-function writeHTMLBottom() {
-    var  HTMLBottom = '<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>';
-    HTMLBottom += '\n\t\t<script src=ajax.js></script>';
-    HTMLBottom += '\n\t</body>';
-    HTMLBottom += '\n</html>';
-    console.log(' ...HTMLbottom transmitted');
-    return HTMLBottom;
-}
-
-function writeForm(res){
-    // send headers
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    // HTML page begins
-    res.write (writeHTMLHead());
-    // HTML body with calculator content
-
-    res.write (writeHTMLBody());
-
-    // HTML page ends
-    res.write (writeHTMLBottom());
-    // Close response
-    res.end();}
 
 var express = require('express');
 var app = express();
+var stylus = require('stylus');
+var nib = require('nib');
+
+
+
+// We use Jade.
+app.set('view engine', 'jade');
+app.set('view options', { pretty: true });
+app.set('views', __dirname + '/views');
 
 app.get('/', function (req, res) {
-    writeForm(res);
+    res.render('homepage',
+        { title : 'Home' }
+    );
 });
 
 app.get('/calc', function (req, res) {
@@ -101,6 +47,21 @@ app.get('/calc', function (req, res) {
 });
 
 app.use(express.static(__dirname));
+app.use(stylus.middleware(
+    { src: __dirname + '/stylus'
+        , compile: function (str, path) {
+        return stylus(str)
+            .set('filename', path)
+            .set('paths', [
+                __dirname
+                , __dirname + '/node_modules'
+            ])
+            .use(nib())
+        }
+    }
+));
+
+
 
 app.listen(1337);
 console.log('Server running at http://127.0.0.1:1337/');

@@ -1,0 +1,19 @@
+doctype
+html
+    head
+        title #{title} - My Site
+        link(rel='stylesheet', href='/stylus/style.css')
+        script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+        script(src="ajax.js")
+
+    body
+        header
+            h1 My calculator
+        form(id="calculator",name="calculator")
+            div
+                input(type="text", name="Zonecalcul", id="Zonecalcul")
+                input(type="submit", id="my_calc_submit", value="Show Result")
+                div(id="result", name="result")
+
+        footer
+            p Running on node with Express, Jade
