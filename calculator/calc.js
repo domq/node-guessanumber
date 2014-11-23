@@ -52,10 +52,6 @@ app.use(stylus.middleware(
         , compile: function (str, path) {
         return stylus(str)
             .set('filename', path)
-            .set('paths', [
-                __dirname
-                , __dirname + '/node_modules'
-            ])
             .use(nib())
         }
     }
