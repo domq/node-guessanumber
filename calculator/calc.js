@@ -33,7 +33,7 @@ var nib = require('nib');
 
 // We use Jade.
 app.set('view engine', 'jade');
-app.set('view options', { pretty: true });
+app.locals.pretty = true;
 app.set('views', __dirname + '/views');
 
 app.get('/', function (req, res) {
