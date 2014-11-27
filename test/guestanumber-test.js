@@ -3,6 +3,7 @@ var assert = require('assert'),
     webdriver = require('selenium-webdriver');
 
 test.describe('Web interface', function() {
+    this.timeout(50000);
     var server = require("../calculator/calc.js");
     test.it('should work', function() {
         var driver = new webdriver.Builder().withCapabilities(
