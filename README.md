@@ -12,7 +12,7 @@ Some node.js test we made in [Dojo meetings](http://fr.wikipedia.org/wiki/Coding
 * **calculator**:
   The third dojo aim to code mathematics behind the interface and to add some tests.
 * **test**:
-  Our test files using [webdriver](http://webdriver.io/) (selenium) and [Mocha](http://visionmedia.github.io/mocha/).
+  Our test files using [webdriver](http://webdriver.io/) (selenium) and [Mocha](http://mochajs.org/).
 
 ## Meeting
 *  2014-11-14: implementing AJAX ?
